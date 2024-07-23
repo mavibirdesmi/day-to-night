@@ -20,7 +20,7 @@ Synthetically relighting day-to-night images.
 
 import cv2
 import numpy as np
-from pipeline.pipeline_utils import white_balance
+from ..pipeline.pipeline_utils import white_balance
 
 
 class LocalLight:

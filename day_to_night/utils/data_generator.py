@@ -21,7 +21,7 @@ import cv2
 import numpy as np
 import pickle
 
-from pipeline.pipeline import run_pipeline
+from ..pipeline.pipeline import run_pipeline
 
 aug_times = 1
 

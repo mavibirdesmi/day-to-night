@@ -18,7 +18,7 @@ in the same directory as the input image.
 """
 
 from argparse import ArgumentParser
-from pipeline.pipeline_utils import get_visible_raw_image, get_metadata, save_image_stage
+from .pipeline_utils import get_visible_raw_image, get_metadata, save_image_stage
 from .pipeline import run_pipeline
 
 

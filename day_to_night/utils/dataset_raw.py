@@ -20,7 +20,7 @@ import os
 import torch
 import torchvision
 from torchvision import transforms
-import utils.data_generator as dg
+from . import data_generator as dg
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
