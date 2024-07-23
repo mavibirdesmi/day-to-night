@@ -21,8 +21,8 @@ import argparse
 import cv2
 import pickle
 
-from pipeline.pipeline_utils import get_metadata, get_visible_raw_image
-from utils.gen_utils import check_dir
+from day_to_night.pipeline.pipeline_utils import get_metadata, get_visible_raw_image
+from day_to_night.utils.gen_utils import check_dir
 
 
 def parse_args():

@@ -29,13 +29,14 @@ from glob import glob
 import scipy.io
 from copy import deepcopy
 
-from utils.relight import relight_locally, apply_local_lights_rgb
-from pipeline.pipeline import run_pipeline
-from pipeline.pipeline_utils import normalize, denormalize, get_visible_raw_image, ratios2floats, white_balance, \
+from day_to_night.utils.relight import relight_locally, apply_local_lights_rgb
+from day_to_night.pipeline.pipeline import run_pipeline
+from day_to_night.pipeline.pipeline_utils import normalize, denormalize, get_visible_raw_image, ratios2floats, white_balance, \
     get_metadata
-from utils.gen_utils import check_dir
+from day_to_night.utils.gen_utils import check_dir
 
-from noise_profiler.image_synthesizer import load_noise_model, synthesize_noisy_image_v2
+from day_to_night.noise_profiler.image_synthesizer import load_noise_model, synthesize_noisy_image_v2
+
 noise_model_path = './noise_profiler/h-gauss-s20-v1'
 noise_model, iso2b1_interp_splines, iso2b2_interp_splines = load_noise_model(path=noise_model_path)
 

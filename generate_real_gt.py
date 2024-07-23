@@ -22,10 +22,10 @@ from glob import glob
 import argparse
 import pickle
 
-from pipeline.pipeline_utils import *
-from pipeline.pipeline import *
-from pipeline.raw_utils import *
-from utils.gen_utils import check_dir
+from day_to_night.pipeline.pipeline_utils import *
+from day_to_night.pipeline import *
+from day_to_night.raw_utils import *
+from day_to_night.utils.gen_utils import check_dir
 
 
 def parse_args():
