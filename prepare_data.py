@@ -29,6 +29,8 @@ from glob import glob
 import scipy.io
 from copy import deepcopy
 
+import pathlib
+
 from day_to_night.utils.relight import relight_locally, apply_local_lights_rgb
 from day_to_night.pipeline.pipeline import run_pipeline
 from day_to_night.pipeline.pipeline_utils import normalize, denormalize, get_visible_raw_image, ratios2floats, white_balance, \
@@ -37,7 +39,7 @@ from day_to_night.utils.gen_utils import check_dir
 
 from day_to_night.noise_profiler.image_synthesizer import load_noise_model, synthesize_noisy_image_v2
 
-noise_model_path = './noise_profiler/h-gauss-s20-v1'
+noise_model_path = str(pathlib.Path(__file__).parent / './noise_profiler/h-gauss-s20-v1')
 noise_model, iso2b1_interp_splines, iso2b2_interp_splines = load_noise_model(path=noise_model_path)
 
 
@@ -191,7 +193,7 @@ if __name__ == "__main__":
     args = parse_args()
 
     # load nighttime illuminants
-    gt_illum = scipy.io.loadmat('utils/gray_card_illum_dict.mat')
+    gt_illum = scipy.io.loadmat(pathlib.Path(__file__).parent / 'day_to_night/utils/gray_card_illum_dict.mat')
     gt_illum = gt_illum['night_dict']
 
     gt_illum[:, 0], gt_illum[:, 1], gt_illum[:, 2] = get_illum_normalized_by_g(gt_illum)
