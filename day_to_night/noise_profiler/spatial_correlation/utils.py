@@ -18,7 +18,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-from noise_profiler.img_utils import normalize
+from ..img_utils import normalize
 
 
 def sample_norm(h_, w_):
