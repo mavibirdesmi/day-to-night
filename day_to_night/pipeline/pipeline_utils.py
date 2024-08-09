@@ -31,6 +31,7 @@ from colour_demosaicing import demosaicing_CFA_Bayer_Menon2007
 from .exif_utils import parse_exif_tag, parse_exif, get_tag_values_from_ifds
 from .opcode import parse_opcode_lists
 from .cct_utils import raw_rgb_to_cct, interpolate_cst
+import json
 
 
 def get_visible_raw_image(image_path):
@@ -59,6 +60,18 @@ def get_image_ifds(image_path):
     ifds = parse_exif(image_path, verbose=False)
     return ifds
 
+def get_default_metadata ():
+    metadata = dict(
+        black_level=0,
+        white_level=2**16,
+        cfa_pattern=[0, 1, 1, 2],
+        as_shot_neutral=[1, 1, 1],
+        color_matrix_1=[1, 0, 0, 0, 1, 0, 0, 0, 1],
+        color_matrix_2=[1, 0, 0, 0, 1, 0, 0, 0, 1],
+        orientation=0
+    )
+    print(f"Using default values for metadata!\n{json.dumps(metadata, indent=4)}")
+    return metadata
 
 def get_metadata(image_path):
     metadata = {}
