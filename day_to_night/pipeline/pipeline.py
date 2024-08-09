@@ -31,7 +31,7 @@ def run_module(image, module, built_in_function, built_in_args):
 
 
 def linearization_stage(current_image, metadata):
-    linearization_table = metadata['linearization_table']
+    linearization_table = metadata.get('linearization_table')
     if linearization_table is not None:
         print('Linearization table found. Not handled.')
         # TODO
@@ -83,9 +83,9 @@ def run_pipeline(image_or_path, params=None, metadata=None, stages=None, clip=Tr
     * Assumes the function takes in `current_image` as the first parameter. 
     '''
     operation_by_stage = {
-        'active_area_cropping': [active_area_cropping, {'active_area': metadata['active_area']}],
-        'default_cropping': [default_cropping, {'default_crop_origin': metadata['default_crop_origin'],
-                                                'default_crop_size': metadata['default_crop_size']}],
+        'active_area_cropping': [active_area_cropping, {'active_area': metadata.get('active_area')}],
+        'default_cropping': [default_cropping, {'default_crop_origin': metadata.get('default_crop_origin'),
+                                                'default_crop_size': metadata.get('default_crop_size')}],
         'linearization': [linearization_stage, {'metadata': metadata}],
         'normal': [normalize, {
             'black_level': metadata['black_level'],
