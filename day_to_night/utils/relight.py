@@ -111,9 +111,15 @@ def apply_local_lights(image, local_lights, cfa_pattern, clip=True, invert_wb=Tr
         image_relights.append(image_relight_1)
 
     # weighted average of original image and locally relit images
-    weights = np.array([ll.get_translated_mask(image.shape) for ll in local_lights])  # for relit images
+    weights = np.array([
+        ll.get_translated_mask(image.shape) for ll in local_lights
+    ])  # for relit images
 
-    image_relight = np.average(np.array(image_relights[:len(local_lights)-num_sat_lights]), axis=0, weights=weights[:len(local_lights)-num_sat_lights])
+    image_relight = np.average(
+        np.array(image_relights[:len(local_lights)-num_sat_lights]),
+        axis=0,
+        weights=weights[:len(local_lights)-num_sat_lights]
+    )
     for ll in range(len(local_lights)-num_sat_lights,len(local_lights)):
         image_relight += (50+50*np.random.rand())*weights[ll, :, :] * image_relights[ll]
     image_relight[image_relight > 1] = 1
