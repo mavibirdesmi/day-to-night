@@ -60,7 +60,7 @@ def get_image_ifds(image_path):
     ifds = parse_exif(image_path, verbose=False)
     return ifds
 
-def get_default_metadata ():
+def get_default_metadata (verbose : bool = False):
     metadata = dict(
         black_level=0,
         white_level=2**16,
@@ -70,7 +70,8 @@ def get_default_metadata ():
         color_matrix_2=[1, 0, 0, 0, 1, 0, 0, 0, 1],
         orientation=0
     )
-    print(f"Using default values for metadata!\n{json.dumps(metadata, indent=4)}")
+    if verbose:
+        print(f"Using default values for metadata!\n{json.dumps(metadata, indent=4)}")
     return metadata
 
 def get_metadata(image_path):
