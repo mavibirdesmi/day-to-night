@@ -14,16 +14,16 @@ For conditions of distribution and use, see the accompanying LICENSE.md file.
 
 """
 
-from utils.unet import UNet
+from day_to_night.utils.unet import UNet
 import argparse
 import os, time, datetime
 import numpy as np
 from skimage.measure import compare_psnr, compare_ssim
 import cv2
 import torch
-from pipeline.pipeline import run_pipeline
-from pipeline.pipeline_utils import get_metadata, get_visible_raw_image
-from utils.gen_utils import check_dir
+from day_to_night.pipeline.pipeline import run_pipeline
+from day_to_night.pipeline.pipeline_utils import get_metadata, get_visible_raw_image
+from day_to_night.utils.gen_utils import check_dir
 
 
 def to_tensor(img):
