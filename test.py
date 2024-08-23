@@ -16,7 +16,9 @@ For conditions of distribution and use, see the accompanying LICENSE.md file.
 
 from day_to_night.utils.unet import UNet
 import argparse
-import os, time, datetime
+import os
+import time
+import datetime
 import numpy as np
 from skimage.measure import compare_psnr, compare_ssim
 import cv2
