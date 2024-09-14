@@ -67,7 +67,7 @@ def parse_args():
     parser.add_argument('--save_light_masks', default=False, action='store_true', help='whether to save light masks, '
                                                                                         'disable for speedup')
     parser.add_argument('--num_sat_lights', default=5, type=int, help='number of small saturated local lights')
-    parser.add_argument('--iso_list', default='1600,3200', type=str,
+    parser.add_argument('--iso_list', type=int, action="extend", nargs="+",
                         help='list of discrete ISOs to pick from when adding noise, separate with comma')
 
     args = parser.parse_args()
@@ -193,7 +193,7 @@ if __name__ == "__main__":
     args = parse_args()
 
     # load nighttime illuminants
-    gt_illum = scipy.io.loadmat('utils/gray_card_illum_dict.mat')
+    gt_illum = scipy.io.loadmat('repos/day-to-night/day_to_night/utils/gray_card_illum_dict.mat')
     gt_illum = gt_illum['night_dict']
 
     gt_illum[:, 0], gt_illum[:, 1], gt_illum[:, 2] = get_illum_normalized_by_g(gt_illum)
@@ -236,7 +236,7 @@ if __name__ == "__main__":
         'tone_curve': 'simple-s-curve',  # options: 'simple-s-curve', 'default', or self-defined module
     }
 
-    iso_list = [int(item) for item in args.iso_list.split(',')]
+    iso_list = args.iso_list
 
     # main loop
     for example_num in range(len(outdoor_daytime_img_names)):
@@ -246,7 +246,7 @@ if __name__ == "__main__":
         example_img_bayer_org = get_visible_raw_image(os.path.join(base_address, outdoor_daytime_img_names[example_num]))
         meta_data_org = get_metadata(os.path.join(base_address, outdoor_daytime_img_names[example_num]))
 
-        rand_iso = iso_list[np.random.randint(2)]
+        rand_iso = iso_list[np.random.randint(len(iso_list))]
         results_ = synth_night_imgs(example_img_bayer_org, meta_data_org, dim=args.dim,
                                     relight=args.relight, iso=rand_iso,
                                     discard_black_level=args.discard_black_level,
